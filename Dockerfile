@@ -1,6 +1,13 @@
-from miktex/miktex
+FROM debian:buster-slim
+
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y \
-  texlive-lang-ngerman \
-  texlive-lang-english
-RUN mpm --admin --require=biblatex,graphics,oberdiek,ifxetex,geometry-de,geometry,graphics-cfg,graphics-def,setspace,ec,arabi,babel-german,hyperref,url,pdfpages,tools,eso-pic,xcolor,amsmath,wrapfig,listings,multirow,colortbl,datetime,etoolbox,fmtcount,xkeyval,acronym,bigfoot,xstring,caption,mptopdf
-RUN fmtutil -sys --all
+            texlive \
+            texlive-lang-english \
+            texlive-lang-german \
+            texlive-latex-extra \
+            texlive-bibtex-extra \
+            biber \
+            latexmk
+RUN fmtutil-sys --all
+RUN apt-get install -y make
